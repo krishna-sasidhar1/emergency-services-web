@@ -1,0 +1,388 @@
+:root {
+    /* Color Palette */
+    --primary: #FF4757;
+    /* Emergency Red */
+    --primary-glow: rgba(255, 71, 87, 0.4);
+    --accent: #2ED573;
+    /* Success Green */
+    --accent-glow: rgba(46, 213, 115, 0.4);
+    --dark-bg: #0F1218;
+    /* Deep Blue-Black */
+    --card-bg: rgba(30, 35, 45, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #FFFFFF;
+    --text-muted: #A4B0C3;
+
+    /* Spacing & Radius */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+
+    /* Transitions */
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-main);
+    overflow: hidden;
+    /* App feel */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, #FF9F43 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Views Management */
+.view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    z-index: 10;
+}
+
+.view.hidden {
+    transform: translateY(100vh);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.view.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Landing Page */
+#landing-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(circle at top right, #1e2532 0%, var(--dark-bg) 60%);
+}
+
+.logo-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.cta-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 18px 42px;
+    border-radius: 100px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 40px var(--primary-glow);
+    transition: all 0.3s var(--ease-elastic);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cta-button:active {
+    transform: scale(0.95);
+}
+
+.features-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* SOS Button Landing */
+.sos-float {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+    animation: pulse-red 2s infinite;
+    cursor: pointer;
+}
+
+@keyframes pulse-red {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(255, 71, 87, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+    }
+}
+
+/* Map View */
+.app-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(15, 18, 24, 0.9) 0%, transparent 100%);
+    pointer-events: none;
+    /* Let clicks pass through to map where transparent */
+}
+
+.app-header>* {
+    pointer-events: auto;
+}
+
+.logo-small {
+    font-family: 'Outfit';
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sos-small {
+    background: var(--primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    animation: flash-border 2s infinite;
+}
+
+.category-filters {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    gap: 10px;
+    padding: 0 1.5rem;
+    z-index: 999;
+    scrollbar-width: none;
+}
+
+.category-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-btn {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-btn.active {
+    background: var(--text-main);
+    color: var(--dark-bg);
+    font-weight: 600;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Behind everything */
+}
+
+/* Custom Marker CSS */
+.custom-pin {
+    background: var(--primary);
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Resource Panel */
+.resource-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    /* Default height */
+    background: var(--dark-bg);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+    z-index: 1000;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    transition: height 0.3s ease;
+}
+
+.panel-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--glass-border);
+    border-radius: 10px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.resource-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* Resource Card */
+.resource-card {
+    background: #1A1F29;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.resource-card:hover {
+    border-color: var(--glass-border);
+    background: #202633;
+}
+
+.rc-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.rc-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.rc-dist {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.rc-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.rc-meta i {
+    margin-right: 4px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-top: 8px;
+}
+
+.status-available {
+    background: rgba(46, 213, 115, 0.2);
+    color: var(--accent);
+}
+
+.status-critical {
+    background: rgba(255, 71, 87, 0.2);
+    color: var(--primary);
+}
+
+/* Animation Utility */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+.loading-spinner {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 2rem;
+}
